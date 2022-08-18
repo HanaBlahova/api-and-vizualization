@@ -1,0 +1,78 @@
+<div>
+  <h2 class="title">Statistics Table</h2>
+  <p *ngIf="metrics.length === 0" class="warning">
+    Please choose at least one metric!
+  </p>
+  <div class="section header">
+    <button
+      *ngIf="!loading"
+      mat-stroked-button
+      color="primary"
+      (click)="loadData()"
+    >
+      Load data
+    </button>
+    <mat-spinner *ngIf="loading"></mat-spinner>
+  </div>
+  <div class="section">
+    <form [formGroup]="form" (ngSubmit)="submit()" class="checkbox_container">
+      <div *ngFor="let stat of stats" class="checkbox">
+        <mat-checkbox
+          formArrayName="selectedStats"
+          [value]="stat"
+          (change)="onCheckboxChange($event)"
+          [checked]="metrics.includes(stat)"
+          >{{ stat }}</mat-checkbox
+        >
+      </div>
+    </form>
+  </div>
+  <div *ngIf="!loading" class="section">
+    <table
+      mat-table
+      matSort
+      (matSortChange)="sortData($event)"
+      [dataSource]="sortedData"
+      class="mat-elevation-z8"
+    >
+      <ng-container matColumnDef="team" class="column">
+        <th mat-header-cell mat-sort-header="team" *matHeaderCellDef>Team</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.team }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="player" class="column">
+        <th mat-header-cell mat-sort-header="player" *matHeaderCellDef>
+          Player
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.player }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="toi" class="column">
+        <th mat-header-cell mat-sort-header="toi" *matHeaderCellDef>toi</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.toi * 1000 | date: "mm:ss" }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="gp" class="column">
+        <th mat-header-cell mat-sort-header="gp" *matHeaderCellDef>gp</th>
+        <td mat-cell *matCellDef="let element">{{ element.gp }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="xg60">
+        <th mat-header-cell mat-sort-header="xg60" *matHeaderCellDef>xg60</th>
+        <td mat-cell *matCellDef="let element">{{ element.xg60 }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="c60">
+        <th mat-header-cell mat-sort-header="c60" *matHeaderCellDef>c60</th>
+        <td mat-cell *matCellDef="let element">{{ element.c60 }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+</div>

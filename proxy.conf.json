@@ -1,0 +1,10 @@
+{
+  "/api": {
+    "target": "http://logiq.statistics.datasport.cz/api/v1",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/api": ""
+    }
+  }
+}

@@ -1,0 +1,14 @@
+.homepage {
+  margin: 1rem;
+  height: calc(100% - 2rem);
+  width: calc(100% - 2rem);
+}
+
+.tab_button:first-child {
+  margin-right: 1rem;
+}
+
+.tab_button.active {
+  background-color: #673ab7;
+  color: #fff;
+}

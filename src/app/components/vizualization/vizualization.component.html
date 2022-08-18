@@ -1,0 +1,24 @@
+<div class="vizualization">
+  <h2 class="title">Shots Vizualization</h2>
+  <div class="header">
+    <div *ngIf="!loading">
+      <button mat-button color="primary" (click)="onFilter('all')">
+        All shots
+      </button>
+      <button mat-button color="primary" (click)="onFilter('goals')">
+        Goals
+      </button>
+    </div>
+    <mat-spinner *ngIf="loading" class="section"></mat-spinner>
+  </div>
+  <div *ngIf="!loading" class="playground">
+    <img src="/assets/images/playground.png" />
+    <div
+      *ngFor="let player of data"
+      (click)="openDialog(player, $event)"
+      class="shot"
+      [style.right]="countY(player.y) + 'px'"
+      [style.bottom]="countX(player.x) + 'px'"
+    ></div>
+  </div>
+</div>
