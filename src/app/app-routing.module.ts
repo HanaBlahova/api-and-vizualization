@@ -4,6 +4,7 @@ import { TableComponent } from './components/table/table.component';
 import { VizualizationComponent } from './components/vizualization/vizualization.component';
 
 const routes: Routes = [
+  { path: '', pathMatch: 'full', redirectTo: 'table' },
   { path: 'table', component: TableComponent },
   { path: 'vizualization', component: VizualizationComponent },
 ];
